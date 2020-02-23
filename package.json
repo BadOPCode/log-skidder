@@ -7,6 +7,7 @@
     "build": "parcel build src/index.ts -d lib",
     "build:w": "parcel src/tester.html",
     "clean": "rm -r lib coverage .nyc_output dist",
+    "lint": "tslint",
     "test": "alsatian \"__tests__/**/*.test.ts\" --tap | tap-bark",
     "test:coverage": "nyc --reporter=lcov --reporter=html npm run test && nyc report"
   },
