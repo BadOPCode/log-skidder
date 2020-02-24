@@ -6,6 +6,10 @@ export interface EventManagers {
     [key:string]: LogManager;
 }
 
+declare interface Manager {
+    [key: string] : ConsoleMethod
+}
+
 export class LogSkidder {
     public handlers: LogHandler = new LogHandler();
     private _original: ConsoleWriter;
@@ -31,11 +35,11 @@ export class LogSkidder {
      */
     hookConsoleMethods() {
         // tslint:disable-next-line: no-console
-        console.error = this.errorConsoleHandler;
+        console.error = this.Manager('undefined').error;
         // tslint:disable-next-line: no-console
-        console.log = this.logConsoleHandler;
+        console.log = this.Manager('undefined').log;
         // tslint:disable-next-line: no-console
-        console.warn = this.warnConsoleHandler;
+        console.warn = this.Manager('undefined').warn;
     }
 
     Manager(name: string) {
@@ -45,32 +49,5 @@ export class LogSkidder {
     Attach(name: string) {
         this._managers[name] = new LogManager(name, this.handlers);
         return this._managers[name];
-    }
-
-    /**
-     * Method used to replace the console.error
-     * @param ...options:any[]
-     * @returns void
-     */
-    errorConsoleHandler:ConsoleMethod = (...options:any[]) => {
-        this.Manager('undefined').error(...options);
-    }
-
-    /**
-     * Method used to replace the console.log
-     * @param ...options:any[]
-     * @returns void
-     */
-    logConsoleHandler:ConsoleMethod = (...options:any[]) => {
-        this.Manager('undefined').log(...options);
-    }
-
-    /**
-     * Method used to replace the console.warn
-     * @param ...options:any[]
-     * @returns void
-     */
-    warnConsoleHandler:ConsoleMethod = (...options:any[]) => {
-        this.Manager('undefined').warn(...options);
     }
 }

@@ -29,21 +29,18 @@ export class FixtureLogSkidder {
 
     @Test("Test console hook")
     public testHook() {
-        Expect(console.log).not.toEqual(this.skidder.logConsoleHandler);
+        const undefMgr = this.skidder.Manager("undefined");
+        SpyOn(undefMgr, "error");
+        SpyOn(undefMgr, "log");
+        SpyOn(undefMgr, "warn");
+        Expect(console.log).not.toEqual(undefMgr.log);
         this.skidder.hookConsoleMethods();
-        Expect(console.log).toEqual(this.skidder.logConsoleHandler);
-    }
-
-    @Test("console handlers should call the undefined manager")
-    public testConsoleHandler() {
-        SpyOn(this.skidder.Manager("undefined"), "error");
-        SpyOn(this.skidder.Manager("undefined"), "log");
-        SpyOn(this.skidder.Manager("undefined"), "warn");
-        this.skidder.errorConsoleHandler("test");
-        Expect(this.skidder.Manager("undefined").error).toHaveBeenCalled();
-        this.skidder.logConsoleHandler("test");
-        Expect(this.skidder.Manager("undefined").log).toHaveBeenCalled();
-        this.skidder.warnConsoleHandler("test");
-        Expect(this.skidder.Manager("undefined").warn).toHaveBeenCalled();
+        Expect(console.log).toEqual(undefMgr.log);
+        console.error("test");
+        Expect(undefMgr.error).toHaveBeenCalled();
+        console.log("test");
+        Expect(undefMgr.log).toHaveBeenCalled();
+        console.warn("test");
+        Expect(undefMgr.warn).toHaveBeenCalled();
     }
 }

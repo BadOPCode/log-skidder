@@ -1,4 +1,4 @@
-import { ConsoleMethod, SearchEventSpecifier } from "./types/LogSkidder";
+import { ConsoleMethod, SearchEventSpecifier, EventLog } from "./types/LogSkidder";
 import { LogHandler } from "./LogHandler";
 
 /**
@@ -15,28 +15,28 @@ export class LogManager {
         this._handlers = logHandlers;
     }
 
+    private _generateLogEvent = (eventType: string, data:any[]) => ({
+        appName: this._appName,
+        eventType,
+        data,
+    });
+
     error:ConsoleMethod = (...options:any[]) => {
-        this._handlers.process({
-            appName: this._appName,
-            eventType: 'error',
-            data: options,
-        });
+        this._handlers.process(
+            this._generateLogEvent('error', options)
+        );
     }
 
     log:ConsoleMethod = (...options:any[]) => {
-        this._handlers.process({
-            appName: this._appName,
-            eventType: 'log',
-            data: options,
-        });
+        this._handlers.process(
+            this._generateLogEvent('log', options)
+        );
     }
 
     warn:ConsoleMethod = (...options:any[]) => {
-        this._handlers.process({
-            appName: this._appName,
-            eventType: 'warn',
-            data: options,
-        });
+        this._handlers.process(
+            this._generateLogEvent('warn', options)
+        );
     }
 
     list = (eventType?: string) => {

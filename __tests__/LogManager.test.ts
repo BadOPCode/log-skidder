@@ -6,8 +6,9 @@ import { LogSkidder } from "../src/LogSkidder";
 export class FixtureLogManager {
     @Test('List should return managers events')
     public testListEvents() {
-        const skid = new LogSkidder()
-        skid.logConsoleHandler('undefined message');
+        const skid = new LogSkidder();
+        skid.hookConsoleMethods();
+        console.log('undefined message');
         const mgr = skid.Attach('tester');
         mgr.log('mgr message');
         Expect(mgr.list().length).toBe(1);
