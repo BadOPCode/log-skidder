@@ -19,8 +19,7 @@ deploy:
   provider: npm
   email: shawn@wmsi.co
   skip_clean: true
-  api_key:
-    secure: Tle1neMMh1fvXcEUzb1QCypcNSD2iidmwEz4KBcSH7jGt7OkamRgc6cJt9r1Ip+KX8hfKm0yRnXfBsvYXq7bE96DvoPQzIaMPoVHnYy6GE0921lxcWJgnBO7LIOhVCvJM7ZNC5APdStwnX7Wmlod99EcKZJIvaOMMhLTN+OT05weOXk/w/CzpHv35LrZS7tlo1vyUQQJa0zxIKDzo1jVl/vSd9LpK/flPYumrBmKy8IBC4lf9Yj+pMnTGOCXDCCT9tySIFZHqnjc0R9a7AowdQdoFKdnkHCDyHO6ri3AYwbLtN9DaPsxs7NIHOSFjCJ5v/GHXzRFGbWhTXmsY1t2+OMPxWt3HYgEN2dVtTUUjfDJW1I1mhIywuNx+/p6SfbrjMJjs+aai4w0LJO1DBRxBtxzoHGe3ixqq7uWBxpNYY+JYWb3b2r/ziYx40Q+pjfwy95BMLAG205HEPFRc+4zUPR9zGFWK0jWXrOGgzJXEUy0ORKEBIB0BsW7+BHyHOxC7+WwQxbSo2Ndxagw2OdUfSZ8/uJGOuttlQxKBsBOqo7SI/x9uZPmedkUdjowtS39t+5EWM+PecPn+aH1UZWNGyfprQeaKell6TvwZLCFFxuTYZWyKuYHZlbkzRLMTpPLdH3tQDrLQsFnrl1GNsGghzIMCGKSH7MDGXWI5355LqU=
+  api_key: $NPM_TOKEN
   on:
     tags: true
     repo: BadOPCode/log-skidder
