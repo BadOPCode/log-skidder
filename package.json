@@ -8,7 +8,7 @@
     "build:w": "parcel src/tester.html",
     "clean": "rm -r lib coverage .nyc_output dist",
     "lint": "tslint -p .",
-    "postinstall": "build",
+    "postinstall": "npm run build",
     "test": "alsatian \"__tests__/**/*.test.ts\" --tap | tap-bark",
     "test:coverage": "nyc --reporter=lcov --reporter=html npm run test && nyc report"
   },
