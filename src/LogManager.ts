@@ -21,22 +21,22 @@ export class LogManager {
         data,
     });
 
-    error:ConsoleMethod = (...options:any[]) => {
+    private _process:ConsoleMethod = (eventType: string, ...options: any[]) => {
         this._handlers.process(
-            this._generateLogEvent('error', options)
+            this._generateLogEvent(eventType, options)
         );
+    }
+
+    error:ConsoleMethod = (...options:any[]) => {
+        this._process('error', ...options);
     }
 
     log:ConsoleMethod = (...options:any[]) => {
-        this._handlers.process(
-            this._generateLogEvent('log', options)
-        );
+        this._process('log', ...options);
     }
 
     warn:ConsoleMethod = (...options:any[]) => {
-        this._handlers.process(
-            this._generateLogEvent('warn', options)
-        );
+        this._process('warn', ...options);
     }
 
     list = (eventType?: string) => {
