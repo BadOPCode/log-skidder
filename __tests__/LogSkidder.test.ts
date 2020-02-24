@@ -42,5 +42,8 @@ export class FixtureLogSkidder {
         Expect(undefMgr.log).toHaveBeenCalled();
         console.warn("test");
         Expect(undefMgr.warn).toHaveBeenCalled();
+        this.skidder.unhookConsoleMethods();
+        Expect(console.log).not.toEqual(undefMgr.log);
+        Expect(console.log).toEqual(this.skidder.original.log);
     }
 }

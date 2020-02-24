@@ -34,12 +34,15 @@ export class LogSkidder {
      * Replaces the original console methods with internal handlers.
      */
     hookConsoleMethods() {
-        // tslint:disable-next-line: no-console
         console.error = this.Manager('undefined').error;
-        // tslint:disable-next-line: no-console
         console.log = this.Manager('undefined').log;
-        // tslint:disable-next-line: no-console
         console.warn = this.Manager('undefined').warn;
+    }
+
+    unhookConsoleMethods() {
+        console.error = this._original.error;
+        console.log = this._original.log;
+        console.warn = this._original.warn;
     }
 
     Manager(name: string) {

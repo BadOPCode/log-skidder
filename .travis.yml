@@ -1,22 +1,24 @@
 env:
-    global:
-        - CC_TEST_REPORTER_ID=2c651b17919b6d64b8a199f1320273cb8cd0af60bd259a3675b835726b5c79dc
-
+  global:
+  - CC_TEST_REPORTER_ID=2c651b17919b6d64b8a199f1320273cb8cd0af60bd259a3675b835726b5c79dc
 language: node_js
 node_js:
-    - "12"
-
+- '12'
 before_script:
-    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    - chmod +x ./cc-test-reporter
-    - ./cc-test-reporter before-build
-      
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
 script:
-    - npm run test:coverage
-
+- npm run test:coverage
 after_script:
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 notifications:
-    email: false
-    
+  email: false
+deploy:
+  provider: npm
+  email: shawn@wmsi.co
+  api_key:
+    secure: JiENNMxp7nAQUVh0kUMgz4yUg0EfBiHORkkvcmDBTH2eXA+KyVaf4n1uHirohtxyQ9YXE/4OEtIYWNTiV9kFGXr/2UI5318iV93IP3NjLwwLwmqf91JM8xD2s73OaTFcOEBIyLQ6aApEydjDG58//BLbmKyhNoFsUZDW6lO8dufaBejXl7ibzwMDgb1vHFY1vTq/N3MT7y+g58XN7HLNr9KT4Zo1l+86hOURAHiPoiKE9ArbdnfbXqrY9I4e3XgPVFOSe0w3AJMDvJG7dUYszYi16Ta4jDM+CtoBDCcLIH5On4O1MLCzB+S8GbBpTeBqbnf2rgseb8ri62hYnwVXSffVInHaNDuXcZo/hfVQdDQRzxwvKP/oqpfoSqFIT/k3FPgLJ8B5CzngkFUwbPfv2LRryuSGrc4hGiE+2Fuhd9Yyfrc0r4Do6SbQHDI01KVPwk1mDAfAekO2Pz9oqSZgMlyUaFaqAiFjbC5MZ0g/gZWQoQEK5vXS760aZEYAChLW3KMrWbRmahScCcIgE93SLy0YCtT7qROJiPMMsf8wLos2TPxRQuXmiSgmrnBJrDo2641K35W2y1vRQZ5Xz9aRyrsuaC36gg0TKJQxNuFJ/fhhJWF+kwXryuG7QF3v68q5QMwG07nIWc05H6HMKRd26fq/Ta3wiaqWdv5Q12bYA3s=
+  on:
+    tags: true

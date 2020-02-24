@@ -9,6 +9,7 @@ export interface ConsoleWriter {
 export interface EventLog {
     appName: string;
     eventType: string;
+    timestamp: Date;
     data: any[];
 }
 

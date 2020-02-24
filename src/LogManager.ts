@@ -18,6 +18,7 @@ export class LogManager {
     private _generateLogEvent = (eventType: string, data:any[]) => ({
         appName: this._appName,
         eventType,
+        timestamp: new Date(),
         data,
     });
 

@@ -11,6 +11,7 @@ let logSkidder;
 
 if(isNodeJS) {
    logSkidder = new LogSkidder();
+   logSkidder.hookConsoleMethods();
 } else {
     if (!window.LogSkidder) {
         window.LogSkidder = new LogSkidder();
