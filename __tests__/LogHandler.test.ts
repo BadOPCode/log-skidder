@@ -7,7 +7,7 @@ import { EventLog } from "../src/types/LogSkidder";
 export class FixtureLogHandler {
 
     @Test('Should add a handler to the stack')
-    public testAddHandler() {
+    public testHandlerAdd() {
         let x: number = 0;
         const handler: LogHandler = new LogHandler();
         const dumHandler = (newEvent: EventLog) => {
@@ -15,7 +15,7 @@ export class FixtureLogHandler {
         };
 
         Expect(handler.handlers).toBeEmpty();
-        handler.addHandler(dumHandler);
+        handler.add(dumHandler);
         Expect(handler.handlers).not.toBeEmpty();
     }
 
@@ -27,11 +27,12 @@ export class FixtureLogHandler {
             x++;
         };
 
-        handler.addHandler(dumHandler);
+        handler.add(dumHandler);
         handler.process({
-            appName: "undefined",
+            groupName: "undefined",
             eventType: "log",
-            data: [ "test" ]
+            data: [ "test" ],
+            timestamp: new Date(),
         });
         Expect(x).toBe(1);
     }
@@ -45,9 +46,10 @@ export class FixtureLogHandler {
         Expect(searchResults).toBeEmpty();
 
         handler.process({
-            appName: "undefined",
+            groupName: "undefined",
             eventType: "log",
-            data: [ "test" ]
+            data: [ "test" ],
+            timestamp: new Date(),
         });
 
         // should return all events with empty specifier
@@ -62,12 +64,12 @@ export class FixtureLogHandler {
         searchResults = handler.search({eventType:"log"});
         Expect(searchResults).not.toBeEmpty();
 
-        // should return empty when appName doesn't exist
-        searchResults = handler.search({appName:"tester"});
+        // should return empty when groupName doesn't exist
+        searchResults = handler.search({groupName:"tester"});
         Expect(searchResults).toBeEmpty();
 
         // should return list when event type has happened
-        searchResults = handler.search({appName:"undefined"});
+        searchResults = handler.search({groupName:"undefined"});
         Expect(searchResults).not.toBeEmpty();
     }
 }

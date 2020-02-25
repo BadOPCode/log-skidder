@@ -6,28 +6,28 @@ import { ConsoleMethod, LogEventHandler, EventLog, SearchEventSpecifier } from "
  *      Stores the events and provides means of parsing.
  */
 export class LogHandler {
-    private _handlers: LogEventHandler[] = [];
+    private _handlerStack: LogEventHandler[] = [];
     private _eventStack: EventLog[] = [];
 
     get handlers() {
-        return this._handlers;
+        return this._handlerStack;
     }
 
-    addHandler = (newHandler: LogEventHandler) => {
-        this._handlers.push(newHandler);
+    add = (newHandler: LogEventHandler) => {
+        this._handlerStack.push(newHandler);
     }
 
     process = (incomingEvent: EventLog) => {
         this._eventStack.push(incomingEvent);
-        this._handlers.forEach((handler:LogEventHandler) => {
+        this._handlerStack.forEach((handler:LogEventHandler) => {
             handler(incomingEvent);
         });
     }
 
     search = (searchSpecifier: SearchEventSpecifier) => {
         return this._eventStack.filter((event:EventLog) => {
-            if (searchSpecifier.appName) {
-                if (event.appName !== searchSpecifier.appName) {
+            if (searchSpecifier.groupName) {
+                if (event.groupName !== searchSpecifier.groupName) {
                     return false;
                 }
             }
