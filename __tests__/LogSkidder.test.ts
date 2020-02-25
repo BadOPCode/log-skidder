@@ -11,25 +11,30 @@ export class FixtureLogSkidder {
         Expect(this.skidder.original).toBeDefined();
     }
 
-    @Test("If manager is not recognized it passes the undefined one")
+    @Test("If manager is not recognized it passes a new one")
     public testUndefManagers() {
-        const undef = this.skidder.Manager('undefined');
-        Expect(this.skidder.Manager('test')).toBe(undef);
+        const undef = this.skidder.group('undefined');
+        const newGroup = this.skidder.group('test');
+        Expect(newGroup).toBeDefined();
+        Expect(newGroup).not.toBe(undef);
     }
 
-    @Test("Attach and Manage should interact with registered managers")
+    @Test("Method group should interact with registered managers")
     public testManagers() {
-        const undef = this.skidder.Manager('undefined');
-        const testHnd = this.skidder.Attach('test');
+        const undef = this.skidder.group('undefined');
+        Expect(undef).toBeDefined();
+        const testHnd = this.skidder.group('test');
         Expect(testHnd).toBeDefined();
+
         Expect(testHnd).not.toEqual(undef);
-        const cmpHnd = this.skidder.Manager('test');
-        Expect(testHnd).toEqual(cmpHnd);
+        testHnd.log('Hello World');
+        const cmpHnd = this.skidder.group('test');
+        Expect(testHnd.list()).toEqual(cmpHnd.list());
     }
 
     @Test("Test console hook")
     public testHook() {
-        const undefMgr = this.skidder.Manager("undefined");
+        const undefMgr = this.skidder.group("undefined");
         SpyOn(undefMgr, "error");
         SpyOn(undefMgr, "log");
         SpyOn(undefMgr, "warn");
@@ -45,5 +50,13 @@ export class FixtureLogSkidder {
         this.skidder.unhookConsoleMethods();
         Expect(console.log).not.toEqual(undefMgr.log);
         Expect(console.log).toEqual(this.skidder.original.log);
+    }
+
+    @Test("Method search should call handlers search.")
+    public testSearch() {
+        const hnd = this.skidder.handlers;
+        SpyOn(hnd, "search");
+        this.skidder.search({});
+        Expect(hnd.search).toHaveBeenCalled();
     }
 }

@@ -7,16 +7,16 @@ import { LogHandler } from "./LogHandler";
  * @class LogManager
  */
 export class LogManager {
-    private _appName: string;
+    private _groupName: string;
     private _handlers: LogHandler;
 
-    constructor(appName: string, logHandlers: LogHandler) {
-        this._appName = appName;
+    constructor(groupName: string, logHandlers: LogHandler) {
+        this._groupName = groupName;
         this._handlers = logHandlers;
     }
 
     private _generateLogEvent = (eventType: string, data:any[]) => ({
-        appName: this._appName,
+        groupName: this._groupName,
         eventType,
         timestamp: new Date(),
         data,
@@ -42,7 +42,7 @@ export class LogManager {
 
     list = (eventType?: string) => {
         const searchParams: SearchEventSpecifier = {
-            appName: this._appName,
+            groupName: this._groupName,
         };
 
         if (eventType) {

@@ -7,7 +7,7 @@ export interface ConsoleWriter {
 }
 
 export interface EventLog {
-    appName: string;
+    groupName: string;
     eventType: string;
     timestamp: Date;
     data: any[];
@@ -16,6 +16,6 @@ export interface EventLog {
 export type LogEventHandler = (newEvent: EventLog) => void;
 
 export interface SearchEventSpecifier {
-    appName?: string;
+    groupName?: string;
     eventType?: string;
 }

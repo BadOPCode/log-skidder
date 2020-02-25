@@ -1,4 +1,4 @@
-import { ConsoleWriter, EventLog, ConsoleMethod } from "./types/LogSkidder";
+import { ConsoleWriter, EventLog, ConsoleMethod, SearchEventSpecifier } from "./types/LogSkidder";
 import { LogManager } from "./LogManager";
 import { LogHandler } from "./LogHandler";
 
@@ -34,9 +34,9 @@ export class LogSkidder {
      * Replaces the original console methods with internal handlers.
      */
     hookConsoleMethods() {
-        console.error = this.Manager('undefined').error;
-        console.log = this.Manager('undefined').log;
-        console.warn = this.Manager('undefined').warn;
+        console.error = this.group('undefined').error;
+        console.log = this.group('undefined').log;
+        console.warn = this.group('undefined').warn;
     }
 
     unhookConsoleMethods() {
@@ -45,12 +45,12 @@ export class LogSkidder {
         console.warn = this._original.warn;
     }
 
-    Manager(name: string) {
-        return this._managers[name] || this._managers.undefined;
+    group(name: string) {
+        const retMgr = this._managers[name] || new LogManager(name, this.handlers);
+        return retMgr
     }
 
-    Attach(name: string) {
-        this._managers[name] = new LogManager(name, this.handlers);
-        return this._managers[name];
+    search(searchSpecifier: SearchEventSpecifier) {
+        return this.handlers.search(searchSpecifier);
     }
 }

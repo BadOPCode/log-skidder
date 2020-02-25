@@ -9,7 +9,7 @@ export class FixtureLogManager {
         const skid = new LogSkidder();
         skid.hookConsoleMethods();
         console.log('undefined message');
-        const mgr = skid.Attach('tester');
+        const mgr = skid.group('tester');
         mgr.log('mgr message');
         Expect(mgr.list().length).toBe(1);
         Expect(skid.handlers.search({}).length).toBe(2);
