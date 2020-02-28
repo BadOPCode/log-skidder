@@ -1,4 +1,4 @@
-import { ConsoleWriter, EventLog, ConsoleMethod, SearchEventSpecifier } from "./types/LogSkidder";
+import { ConsoleWriter, EventLog, ConsoleMethod, SearchEventSpecifier } from "./LogSkidder.types";
 import { LogManager } from "./LogManager";
 import { LogHandler } from "./LogHandler";
 

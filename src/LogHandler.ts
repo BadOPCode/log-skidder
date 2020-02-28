@@ -1,4 +1,4 @@
-import { ConsoleMethod, LogEventHandler, EventLog, SearchEventSpecifier } from "./types/LogSkidder";
+import { ConsoleMethod, LogEventHandler, EventLog, SearchEventSpecifier } from "./LogSkidder.types";
 
 /**
  * @class LogHandler
