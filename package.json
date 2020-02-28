@@ -1,10 +1,10 @@
 {
   "name": "log-skidder",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Provides a common logging interface.",
   "main": "dist/log-skidder.js",
   "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/",
   "scripts": {
     "build": "npm run build:dist && npm run build:lib",
     "build:dist": "parcel build src/index.ts -d dist --out-file log-skidder.js",

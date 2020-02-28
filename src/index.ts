@@ -7,7 +7,7 @@ declare global {
 }
 
 const isNodeJS = typeof window !== 'object';
-let logSkidder;
+let logSkidder: LogSkidder;
 
 if(isNodeJS) {
    logSkidder = new LogSkidder();
