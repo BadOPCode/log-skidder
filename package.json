@@ -1,6 +1,6 @@
 {
   "name": "log-skidder",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Provides a common logging interface.",
   "main": "dist/log-skidder.js",
   "module": "lib/index.js",
@@ -28,13 +28,13 @@
   "license": "MIT",
   "devDependencies": {
     "alsatian": "^3.2.1",
-    "nyc": "^15.0.0",
+    "nyc": "^15.0.1",
     "tap-bark": "^2.3.1",
-    "ts-nodash": "^1.1.6",
-    "tslint": "^6.0.0"
+    "ts-nodash": "^1.2.4",
+    "tslint": "^6.1.1"
   },
   "dependencies": {
     "parcel-bundler": "^1.12.4",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   }
 }
