@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "parcel-bundler": "^1.12.4",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.3",
     "snyk": "^1.341.1"
   },
   "snyk": true
