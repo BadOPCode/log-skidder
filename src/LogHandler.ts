@@ -33,16 +33,14 @@ export class LogHandler {
     }
 
     private _queryStack(searchSpecifier: SearchEventSpecifier, event:EventLog) {
-        if (searchSpecifier.groupName) {
-            if (event.groupName !== searchSpecifier.groupName) {
+        if (searchSpecifier.groupName &&
+            event.groupName !== searchSpecifier.groupName) {
                 return false;
-            }
         }
 
-        if (searchSpecifier.eventType) {
-            if (event.eventType !== searchSpecifier.eventType) {
+        if (searchSpecifier.eventType &&
+            event.eventType !== searchSpecifier.eventType) {
                 return false;
-            }
         }
 
         return true;

@@ -54,17 +54,15 @@ export class FixtureLogSkidder {
 
     @Test("Method search should call handlers search.")
     public testSearch() {
-        const hnd = this.skidder.handlers;
-        SpyOn(hnd, "search");
+        SpyOn(this.skidder.handlers, "search");
         this.skidder.search({});
-        Expect(hnd.search).toHaveBeenCalled();
+        Expect(this.skidder.handlers.search).toHaveBeenCalled();
     }
 
     @Test("Method remove should call handlers remove.")
     public testRemove() {
-        const hnd = this.skidder.handlers;
-        SpyOn(hnd, "remove");
+        SpyOn(this.skidder.handlers, "remove");
         this.skidder.remove({});
-        Expect(hnd.remove).toHaveBeenCalled();
+        Expect(this.skidder.handlers.remove).toHaveBeenCalled();
     }
 }
