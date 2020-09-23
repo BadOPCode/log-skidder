@@ -13,10 +13,18 @@ export class LogHandler {
         return this._handlerStack;
     }
 
+    /**
+     * Add a new handler to the handlers stack.
+     * @param newHandler
+     */
     add = (newHandler: LogEventHandler) => {
         this._handlerStack.push(newHandler);
     }
 
+    /**
+     * Add an event to the log stack and run it through the handler stack.
+     * @param incomingEvent
+     */
     process = (incomingEvent: EventLog) => {
         this._eventStack.push(incomingEvent);
         this._handlerStack.forEach((handler:LogEventHandler) => {
@@ -24,6 +32,10 @@ export class LogHandler {
         });
     }
 
+    /**
+     * This method returns a list of log objects based on the specifier used.
+     * @param searchSpecifier Specifier object of what should be listed.
+     */
     search = (searchSpecifier: SearchEventSpecifier) => {
         return this._eventStack.filter((event:EventLog) => {
             if (searchSpecifier.groupName) {
@@ -39,6 +51,28 @@ export class LogHandler {
             }
 
             return true;
+        });
+    }
+
+    /**
+     * Method to remove specified events from the log stack.
+     * @param removeSpecifier Specifier object of what to remove.
+     */
+    remove = (removeSpecifier: SearchEventSpecifier) => {
+        this._eventStack = this._eventStack.filter((event:EventLog) => {
+            if (removeSpecifier.groupName) {
+                if (event.groupName !== removeSpecifier.groupName) {
+                    return true;
+                }
+            }
+
+            if (removeSpecifier.eventType) {
+                if (event.eventType !== removeSpecifier.eventType) {
+                    return true;
+                }
+            }
+
+            return false;
         });
     }
 }

@@ -15,4 +15,32 @@ export class FixtureLogManager {
         Expect(skid.handlers.search({}).length).toBe(2);
         Expect(mgr.list('error').length).toBe(0);
     }
+
+    @Test('Put should set a non-predefined event type')
+    public testPutEvent() {
+        const skid = new LogSkidder();
+        const mgr = skid.group('test');
+        mgr.put('custom', ['testing']);
+        const list = mgr.list('custom');
+        Expect(list.length).toBe(1);
+        Expect(list[0].eventType).toBe('custom');
+    }
+
+    @Test('Clear should remove events from group')
+    public testClearEvent() {
+        const skid = new LogSkidder();
+        const mgr = skid.group('test');
+        mgr.put('custom', ['testing']);
+        mgr.log('another test');
+        mgr.clear();
+        let list = mgr.list();
+        Expect(list.length).toBe(0);
+
+        mgr.log('test 1');
+        mgr.error('test 2');
+        mgr.warn('test 3');
+        mgr.clear('log');
+        list = mgr.list();
+        Expect(list.length).toBe(2);
+    }
 }

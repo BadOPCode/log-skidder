@@ -45,7 +45,9 @@ const logMgr = skid.group('My App');
     - error(): Method to use in the exact way you would use console.error
     - log(): Method to use in the exact way you would use console.log
     - warn(): Method to use in the exact way you would use console.warn
+    - put(): With this method you can specify custom event types.  First argument is a string that specifies the event type. All arguments past the first is treated as the log message.
     - list(): Returns a list of events that matches the event type parameter specified.
+    - clear(): This method clears events from the log stack.
 
 With this log manager you can easily log events. Just use them exactly you would use the console counter parts.
 ```
@@ -91,6 +93,15 @@ This will return a list of all the warnings from "My App".  But you can list all
 ```
 skid.handlers.search({});
 ```
+
+To remove events you can use the method remove using a specifier like above. 
+```
+skid.remove({
+    groupName: 'Bad Group',
+    eventType: 'log',
+});
+```
+This will remove all log events in group 'Bad Group.  Specifying a event type but not a group will remove events of the specified type in all groups.  As well as specify a group name without a event type will remove all events in the specified group.
 
 
 ## Special Browser Information
