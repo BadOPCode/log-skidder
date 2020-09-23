@@ -1,7 +1,7 @@
 import { Expect, Test, TestFixture, Setup } from "alsatian";
 
 import { LogHandler } from "../src/LogHandler";
-import { EventLog } from "../src/types/LogSkidder";
+import { EventLog } from "../src/LogSkidder.types";
 
 @TestFixture('LogHandler')
 export class FixtureLogHandler {
