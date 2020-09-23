@@ -72,4 +72,43 @@ export class FixtureLogHandler {
         searchResults = handler.search({groupName:"undefined"});
         Expect(searchResults).not.toBeEmpty();
     }
+
+    @Test('remove should only remove matching events')
+    public testRemoveEvents() {
+        const handler = new LogHandler();
+        handler.process({
+            groupName: "undefined",
+            eventType: "log",
+            data: [ "test" ],
+            timestamp: new Date(),
+        });
+
+        handler.process({
+            groupName: "undefined",
+            eventType: "error",
+            data: [ "test" ],
+            timestamp: new Date(),
+        });
+
+        handler.process({
+            groupName: "tester",
+            eventType: "warn",
+            data: [ "test" ],
+            timestamp: new Date(),
+        });
+
+        handler.remove({eventType:'log'});
+        let list = handler.search({});
+        Expect(list.length).toBe(2);
+        Expect(list[0].eventType).toBe('error');
+
+        handler.remove({groupName: 'undefined'});
+        list = handler.search({});
+        Expect(list.length).toBe(1);
+        Expect(list[0].groupName).toBe('tester');
+
+        handler.remove({groupName:'tester', eventType:'warn'});
+        list = handler.search({});
+        Expect(list.length).toBe(0);
+    }
 }

@@ -1,6 +1,6 @@
 {
   "name": "log-skidder",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Provides a common logging interface.",
   "main": "dist/log-skidder.js",
   "module": "lib/index.js",
@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "parcel-bundler": "^1.12.4",
-    "snyk": "^1.386.0",
-    "typescript": "^4.0.2"
+    "snyk": "^1.398.1",
+    "typescript": "^4.0.3"
   },
   "snyk": true
 }
