@@ -68,11 +68,8 @@ export class LogManager {
     list = (eventType?: string): EventLog[] => {
         const searchParams: SearchEventSpecifier = {
             groupName: this._groupName,
+            eventType,
         };
-
-        if (eventType) {
-            searchParams.eventType = eventType;
-        }
 
         return this._handlers.search(searchParams);
     }
@@ -84,11 +81,8 @@ export class LogManager {
     clear = (eventType?: string) => {
         const searchParams: SearchEventSpecifier = {
             groupName: this._groupName,
+            eventType,
         };
-
-        if (eventType) {
-            searchParams.eventType = eventType;
-        }
 
         return this._handlers.remove(searchParams);
     }

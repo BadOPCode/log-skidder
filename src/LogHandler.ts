@@ -32,26 +32,28 @@ export class LogHandler {
         });
     }
 
+    private _queryStack(searchSpecifier: SearchEventSpecifier, event:EventLog) {
+        if (searchSpecifier.groupName) {
+            if (event.groupName !== searchSpecifier.groupName) {
+                return false;
+            }
+        }
+
+        if (searchSpecifier.eventType) {
+            if (event.eventType !== searchSpecifier.eventType) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * This method returns a list of log objects based on the specifier used.
      * @param searchSpecifier Specifier object of what should be listed.
      */
     search = (searchSpecifier: SearchEventSpecifier) => {
-        return this._eventStack.filter((event:EventLog) => {
-            if (searchSpecifier.groupName) {
-                if (event.groupName !== searchSpecifier.groupName) {
-                    return false;
-                }
-            }
-
-            if (searchSpecifier.eventType) {
-                if (event.eventType !== searchSpecifier.eventType) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
+        return this._eventStack.filter((event: EventLog)=>this._queryStack(searchSpecifier, event));
     }
 
     /**
@@ -59,20 +61,6 @@ export class LogHandler {
      * @param removeSpecifier Specifier object of what to remove.
      */
     remove = (removeSpecifier: SearchEventSpecifier) => {
-        this._eventStack = this._eventStack.filter((event:EventLog) => {
-            if (removeSpecifier.groupName) {
-                if (event.groupName !== removeSpecifier.groupName) {
-                    return true;
-                }
-            }
-
-            if (removeSpecifier.eventType) {
-                if (event.eventType !== removeSpecifier.eventType) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
+        this._eventStack = this._eventStack.filter((event: EventLog)=>!this._queryStack(removeSpecifier, event));
     }
 }

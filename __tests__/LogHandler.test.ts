@@ -5,7 +5,6 @@ import { EventLog } from "../src/LogSkidder.types";
 
 @TestFixture('LogHandler')
 export class FixtureLogHandler {
-
     @Test('Should add a handler to the stack')
     public testHandlerAdd() {
         let x: number = 0;
@@ -73,9 +72,7 @@ export class FixtureLogHandler {
         Expect(searchResults).not.toBeEmpty();
     }
 
-    @Test('remove should only remove matching events')
-    public testRemoveEvents() {
-        const handler = new LogHandler();
+    static addDummyLogs(handler:LogHandler) {
         handler.process({
             groupName: "undefined",
             eventType: "log",
@@ -96,6 +93,13 @@ export class FixtureLogHandler {
             data: [ "test" ],
             timestamp: new Date(),
         });
+    }
+
+    @Test('remove should only remove matching events')
+    public testRemoveEvents() {
+        const handler = new LogHandler();
+
+        FixtureLogHandler.addDummyLogs(handler);
 
         handler.remove({eventType:'log'});
         let list = handler.search({});
