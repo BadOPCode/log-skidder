@@ -1,6 +1,6 @@
 {
   "name": "log-skidder",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Provides a common logging interface.",
   "main": "dist/log-skidder.js",
   "module": "lib/index.js",

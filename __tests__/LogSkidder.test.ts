@@ -65,4 +65,18 @@ export class FixtureLogSkidder {
         this.skidder.remove({});
         Expect(this.skidder.handlers.remove).toHaveBeenCalled();
     }
+
+    @Test("Store method should call process")
+    public testStore() {
+        SpyOn(this.skidder.handlers, "process");
+        this.skidder.remove({});
+        this.skidder.store({
+            eventType: 'test',
+            groupName: 'tester',
+            timestamp: new Date(),
+            data: [ 'hello world' ]
+        });
+        Expect(this.skidder.handlers.process).toHaveBeenCalled();
+        Expect(this.skidder.search({eventType: 'test'}).length).toBe(1);
+    }
 }

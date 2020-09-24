@@ -34,6 +34,7 @@ This will bootstrap the Log Skidder system and provide a LogSkidder object.
     - hookConsoleMethods(): This method will replace the console methods to the log manager undefined.
     - unhookConsoleMethods(): This will return the original native console methods.
     - group(): This method returns the log manager name specified.  If name is not found it will return a new log manager with the specified group.
+    - store(): Store method takes a event object and places it verbatim into the log stack and runs the handlers.  Useful for placing events from external sources.
 
 In your application bootstrap you will want to make a log manager specifically for your application. To do so just add a line like bellow.
 

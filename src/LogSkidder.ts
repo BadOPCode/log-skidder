@@ -57,4 +57,8 @@ export class LogSkidder {
     remove(removeSpecifier: SearchEventSpecifier) {
         this.handlers.remove(removeSpecifier);
     }
+
+    store(event: EventLog) {
+        this.handlers.process(event);
+    }
 }
