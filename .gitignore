@@ -64,3 +64,4 @@ dist/
 lib/
 .DS_Store
 .cache
+.parcel-cache
