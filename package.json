@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "parcel": "^2.6.2",
-    "@snyk/protect": "^1.954.0",
+    "@snyk/protect": "^1.1035.0",
     "typescript": "^4.8.2"
   },
   "snyk": true
