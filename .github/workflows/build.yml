@@ -30,7 +30,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm run test:coverage
     - name: Code Climate coverage
-      uses: aktions/codeclimate-test-reporter@v1
+      uses: BadOPCode/codeclimate-test-reporter@v1.3
       if: ${{ github.event_name != 'pull_request' }}
       with:
         codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
